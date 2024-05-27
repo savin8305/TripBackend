@@ -1,0 +1,521 @@
+.maintripcontainer {
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  flex-direction: space-around;
+  border-radius: 0px;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  width: 100% !important;
+  height: auto;
+  margin-top:35px;
+  position: relative;
+  overflow-y: auto;
+  top: calc(20% - 100px);
+  right: 0px;
+  border: 0px solid #d8d8d87b;
+  z-index: 10;
+  padding-top:25px !important;
+  justify-content: center !important;
+  align-items: center;
+}
+
+.firstAutoC {
+  width: 100% !important;
+  margin-left: 40px !important;
+}
+
+.DateButtonChild {
+  height: 40px !important;
+}
+
+.calendarServices {
+  width: 50% !important;
+}
+
+.serviceBig {
+  width: 350px !important;
+}
+
+.serviceDatePicker {
+  margin-left: 8.5rem !important;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    -5px -5px 10px rgba(255, 255, 255, 0),
+    10px 10px 20px rgba(0, 0, 0, 0.2);
+  width: 97%;
+  height: 75vh;
+  position: fixed;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  /* Higher z-index to ensure it's above the .topContainer */
+}
+
+.calendareditChild {
+  margin-left:0rem;
+  margin-top:-2px;
+  cursor: pointer;
+  border-radius:4px;
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .container {
+    height: 70vh;
+  }
+
+  .maintripontainer {
+    top: calc(17% - 100px);
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: calc(90%);
+    position: fixed;
+    /* or position: absolute; */
+    top: 55vh;
+    height: 60vh;
+  }
+
+
+  .maintripontainer {
+    width: calc(90%);
+    /* Reduce width when viewport width is less than or equal to 600px */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    top: 3%;
+    /* Distance from the top of the viewport */
+  }
+
+}
+
+
+
+
+.mainclass {
+  margin-top: 4rem;
+  width: 98vw;
+  height: 100px;
+  border-radius: 2px;
+  box-shadow: 0 4px 10px 0 rgba(235, 235, 235, 0.37);
+  backdrop-filter: blur(4px);
+}
+
+.firstComp {
+  width: 100%;
+}
+
+.res-p {
+  padding: 20px;
+}
+
+.border {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.b-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.m-top-16 {
+  margin-top: 16px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 20px;
+  z-index: 33333;
+}
+
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.col-lg-2 {
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
+}
+
+
+.h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.search-btn {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.search-btn button {
+  width: 150px;
+}
+
+/* Original CSS */
+
+.background {
+  background-image: linear-gradient(to right,
+      rgba(0, 0, 0, 0.2) 1px,
+      transparent 0.01px),
+    linear-gradient(to bottom, rgba(213, 80, 80, 0.2) 0.1px, transparent 0.01px);
+  background-size: 40px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -9999;
+  margin-top: 4rem;
+}
+
+.background.dark-mode {
+  background-image: linear-gradient(to right,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+}
+
+.tripClass {
+  display: flex;
+  font: bold;
+  font-weight: 900;
+  margin-top: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.thirBox {
+  width: 95%;
+}
+
+.editCalendar {
+  margin-top: 0px;
+}
+
+
+
+@media (max-width: 768px) {
+  .background {
+    background-image: linear-gradient(to right,
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 0.01px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 0.01px);
+    background-size: 25px 25px;
+    background-position: center;
+  }
+
+  .background.dark-mode {
+    background-size: 25px 25px;
+    background-position: center;
+  }
+}
+
+@media (max-width: 824px) {
+  .background {
+    background-image: linear-gradient(to right,
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 0.01px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 0.01px);
+    background-size: 25px 25px;
+    background-position: center;
+  }
+
+  .background.dark-mode {
+    background-size: 25px 25px;
+    background-position: center;
+  }
+
+}
+
+.tripClassinner {
+  flex-wrap: wrap;
+  display: flex;
+  margin: 10rem;
+  justify-content: center;
+  align-items: center;
+  z-index: -1000;
+}
+
+.boxContainer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000;
+  box-shadow: 24;
+  height: 90%;
+  width: 70%;
+  box-shadow: 0 0 10px 0 white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainBoxContainer {
+  width: 100%;
+  height: 90%;
+  margin: 5rem;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whenService {
+  margin-left: 10px !important;
+}
+
+/* Responsive Breakpoints */
+@media only screen and (max-width: 768px) {
+  .maincontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .firstComp {
+    width: 80%;
+
+  }
+
+  .thirdAuto {
+    width: 100%;
+    margin-left: 0px !important;
+  }
+
+  .thirdAuto2 {
+    width: 100%;
+  }
+
+  .serialAuto {
+    margin-left: 1.5rem;
+    width: 130px;
+  }
+
+  .newDatePick {
+    margin-left: 0.3rem !important;
+    margin-top: 8px;
+  }
+}
+
+.firstBox {
+  width: 300px !important;
+  padding: 10px !important;
+}
+
+.maintTripHomeTable {
+  margin: 1rem !important;
+  overflow: hidden;
+  overflow-x: auto;
+  width: 60% !important;
+}
+
+.calendaredit {
+  margin-left: 8.15rem !important;
+  border-radius: 0% !important;
+
+}
+
+.iconButtonStyle {
+  margin-left: 8rem !important;
+  border-radius: 0% !important;
+}
+.serviceFormC{
+  width:240px !important;
+ }
+ .serviceForm2{
+   margin-left:28px !important;
+ }
+
+.secondAutoC{
+  margin-left:35px;
+}
+
+@media only screen and (max-width: 480px) {
+  .maintripcontainer {
+  }
+  .boxContainer {
+    height: 600px;
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .DateButton {
+    margin-left: 5rem !important;
+  }
+
+  .calendaredit {
+    margin-left: 4rem !important;
+  }
+
+  .serviceDatePicker {
+    margin-left: 5.5rem !important;
+    width: 150px !important;
+  }
+
+  .calendareditChild {
+    margin-top:0px !important;
+    height:34px !important;
+    border-radius:4px !important;
+    margin-left:1px !important;
+    cursor: pointer;
+  }
+  
+  .firstAuto {
+    width: 230px;
+    ;
+  }
+
+  .firstAutoC {
+    margin-left: 10px !important;
+  }
+
+  .serviceBig {
+    width: 175px !important;
+    margin-left: 10px !important;
+  }
+
+  .secondAutoC {
+    width:150px !important;
+    margin-left:0px;
+  }
+  .whenService {
+    width: 150px !important;
+    margin-left: -9.5px !important;
+  }
+ .mainclass {
+    margin-top: 3rem;
+    width: 98vw;
+    height: 80px;
+    border-radius: 2px;
+    box-shadow: 0 4px 10px 0 rgba(235, 235, 235, 0.37);
+    backdrop-filter: blur(2px);
+  }
+
+  .editCalendar {
+    margin-top: 30px;
+    margin-left: 10px;
+  }
+
+  .mainTable {
+    width: 100% !important;
+  }
+
+  .thirBox {
+    width: 50% !important;
+  }
+
+  .firstBox {
+    width: 145px !important;
+  }
+
+  .maintTripHomeTable {
+    overflow: hidden;
+    overflow-x: auto;
+    width: 95% !important;
+  }
+
+  .datePickerAuto {
+    margin-left: -1rem !important;
+  }
+
+  .mainTableContainer {
+    overflow-y: scroll !important;
+  }
+
+  .DateButtonChild {
+    margin-left: 0px !important;
+    width: 110px !important;
+  }
+  .serviceFormC{
+    width:90px !important;
+    margin-left:10px !important;
+  }
+  .serviceForm2{
+    margin-left:18px !important;
+  }
+}
+
+
+
+@media only screen and (min-width: 601px) and (max-width:1024px) {
+  .maintripcontainer{
+    width:95% !important;
+  }
+  .serviceBig{
+    margin-left:38px !important;
+    width:378px !important;
+  }
+  .serviceDatePicker {
+    margin-left:10.15rem !important;
+  }
+  .serviceFormC {
+    margin-left:40px !important;
+   }
+   .serviceForm2{
+    margin-left:40px !important;
+   }
+   .maintTripHomeTable{
+    width:90% !important;
+   }
+}
+
+/* For laptops and PCs */
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+  .mainAccordion .serviceForm2 {
+    /* Laptop and PC styles */
+  }
+}
+
+/* For larger screens */
+@media only screen and (min-width: 1441px) {
+  .mainAccordion {
+    /* TV styles */
+  }
+}
+
+.mainTableContainer {
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+}
+
+.mainAccordionDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+  .newDatePick {
+    width: 120px;
+  }
+}

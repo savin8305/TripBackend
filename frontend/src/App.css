@@ -1,0 +1,107 @@
+/* styles.css */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  flex-wrap: nowrap;
+}
+
+.background {
+  top: 0rem;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2) 1px,
+      transparent 0.01px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0.1px, transparent 0.01px);
+  background-size: 40px 140px;
+  left: 0;
+  width: 100%;
+  height: 6rem;
+  z-index: 1;
+  position: absolute;
+  backdrop-filter: blur(15px); 
+}
+
+.background.dark-mode {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent 50%);
+  background-size: 40px 140px;
+  left: 0;
+  width: 100%;
+  height: 6rem;
+  z-index: 1;
+  backdrop-filter: blur(15px); 
+}
+
+@media (max-width: 768px) {
+  .background {
+    background-size: 25px 25px; 
+  }
+
+  .background.dark-mode {
+    background-size: 25px 25px; 
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Tablet styles */
+  .background {
+    /* Adjust styles for tablets */
+    background-size: 30px 30px;
+    height: 5rem;
+  }
+
+  .background.dark-mode {
+    /* Adjust styles for tablets in dark mode */
+    background-size: 30px 30px;
+    height: 5rem;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .background {
+    background-size: 35px 35px;
+    height: 6rem;
+  }
+
+  .background.dark-mode {
+    background-size: 35px 35px;
+    height: 6rem;
+  }
+}
+
+@media (min-width: 1441px) {
+  /* PC styles */
+  .background {
+    background-size: 40px 40px;
+    height: 7rem;
+  }
+
+  .background.dark-mode {
+    background-size: 40px 40px;
+    height: 7rem;
+  }
+}
+
+.button-container {
+  position: fixed;
+  bottom: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clear-button,
+.submit-button {
+  margin: 0 10px; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+}

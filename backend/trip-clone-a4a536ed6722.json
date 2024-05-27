@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "trip-clone",
+    "private_key_id": "a4a536ed6722ed191b9765ae4a0b7d0f86a37664",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDsudrTd0TI7yy/\nNab6T8vuji2tUIQ+60mxWfNnH4iO3kYzItJdGobQCfuVU+mNMxnIRNvTonmOp6PR\np7Si3vgqnUTIL6GmwtYHN+rw1jSgDNPWJbOYyQVkmQVMML+rNrK/sAJnO9FHTWDu\nqIRkK95Z3KMYHPuDwxIyev/mqWW+TMUR2qQc4ZF8vRgM5/FvLRZKS+mFb84wfRp0\nWIuBTWbPsxS6oz6bNMdHa0agCgJi72y6HqDb6XLTJDYRJ2AvDnK4wyEW6G6IsCka\nsmU8dlbJCxkQ643oBi0CiK2jTCa/ORUHrqB/9nfY1ucRsJUr1h/cG+5LJEeXHVM3\ntTc6jpeTAgMBAAECggEASzJWkqnmTbW8Dxkp64WBkEvVsqJK//mZtR6PtQhNRqTQ\nw9mh3TVZ8afaJPs8yz+aRwWolrebyXbzENwnAz20s0S13qlSvjhR6IUYulww505r\n1DCxtizU67m39xXdLLP5X+63NLfJqM6ppeYd9/v/a6gsnrJGKvrCQwrTUyAoU6RO\n5eQdPZUz38r8YRXkiHMgFX/A0WJLJUMKucKE17uxvX9lDk9UoQd6yPYD/SHNVl1E\noq+Qiwu9fRbqjMGWIKFBBxcr2CF0zXh9n8V9H5hnyAEWYuibMjiv4oQTTfNPri8K\nBDVWwTyqn12Q8ADr/FR1+yjvpNJHpi2E97yj7fzCQQKBgQD4ZDCInl/tYgtEqPPG\nfcNHPQvxqbj2Ymu+QzBjKMsZBXvGXa61ZSHgCtc/1EXyNDsMX0zOwznklQSdvE/l\nXCQs0/SobcsnT45FI1viAYnlpqz9gObhdP7WPpDGmQqUW9+QlXqftKoJ4/c+YxXr\nS+KNNxTJ1AkgqDGrbhoANSsIYwKBgQDz+jBaSWCxDZmZMy4qUu7hg6Xbj6GJuWHC\nJjjGmw3VKnBVQMpL3n4vXZ9zfN7dcVjfwLXkKmPZMf5ZJzfN04mfVpnaYa1Wx6Oo\n/H0wKZ16Whyb2G+IoVDyoMyefLWizG5xydcAPvjDGdYWjJedMYZMI1T5D0VM8zwW\nsQRb2vSjEQKBgQDwo//xG55L2GSaTCR/9G8voRDlO0yaRpejaGyEZIz+3LUhZLlR\nu3yqFVab3Ac3sypRvjInTjPUJBqoxjuRNUdGtsGcO2JJ32UxziPCPUNfXa7SmgMU\nAcixv0N7Y+FAAhIBfQ+jkd/6XQS3SD+ACbCepvJY5jdBkDEuqChAc0IRiQKBgHNJ\nLb/8HGyNeJ8jyBTHy4lUo/L0E+j4aHFNjlaKviaUPzCJxQ3EvOu02bvAra8F+HEC\npvCB91ySexW1qnDgHI/mZB0FOtteyr73UFCJ2ZgPLKWXyFxPneiIgygA1fNvlmC+\nd5HuL65BbyCInrvwwv0HVQe7Z4vNA//U9bJR7HeBAoGAJPOykAoREsrSXAPBD7o+\nMMEIcF1OWDAm46UDSxO6c3xwHHQqEZMw51+WcYUzG4CZH/ja2htGvsw1ZDwtcwQb\nPRJX1auLCYDglx7HUrP+EVD4SXYaU3fg1uDG9yEMN2IL551nJap5DEGpgC1Z1lg+\niwvSMiaea+ptCADCkbUmpTc=\n-----END PRIVATE KEY-----\n",
+    "client_email": "trip-plane@trip-clone.iam.gserviceaccount.com",
+    "client_id": "106237026780811114257",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/trip-plane%40trip-clone.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
