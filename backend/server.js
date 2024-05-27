@@ -15,7 +15,9 @@ connectToDatabase()
 setupRoutes(app);
 console.log("process.env.MONGO_URI",process.env.MONGO_URI);
 console.log("SPREADSHEET_ID",process.env.SPREADSHEET_ID);
-
+app.use("/",(req,res)=>{
+  res.send("Hello Word")
+})
 app.delete("/deletedata/:id", async (req, res) => {
   const id = req.params.id;
   console.log("id for deletion", id);
