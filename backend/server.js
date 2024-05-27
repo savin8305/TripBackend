@@ -10,8 +10,11 @@ config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
-connectToDatabase()
+app.use(cors({
+  origin: 'https://tripexpense.vercel.app',
+  credentials: true,
+  optionsSuccessStatus: 204, // 204 No Content is a common choice
+}));connectToDatabase()
 setupRoutes(app);
 console.log("process.env.MONGO_URI",process.env.MONGO_URI);
 console.log("SPREADSHEET_ID",process.env.SPREADSHEET_ID);
