@@ -13,23 +13,33 @@ app.use(express.json());
 app.use(cors({
   origin: 'https://tripexpense.vercel.app',
   credentials: true,
-  optionsSuccessStatus: 204, 
-}));connectToDatabase()
+  optionsSuccessStatus: 204, // 204 No Content is a common choice
+}));
+
+connectToDatabase();
 setupRoutes(app);
-console.log("process.env.MONGO_URI",process.env.MONGO_URI);
-console.log("SPREADSHEET_ID",process.env.SPREADSHEET_ID);
+
+console.log("process.env.MONGO_URI", process.env.MONGO_URI);
+console.log("SPREADSHEET_ID", process.env.SPREADSHEET_ID);
+
 app.use("/test", (req, res) => {
   res.send("Hello world!");
 });
+
 app.delete("/deletedata/:id", async (req, res) => {
   const id = req.params.id;
-  console.log("id for deletion", id);
+  console.log("id for deletion",id);
 
   try {
-    let result = await Data.findOneAndUpdate(
+    let result = await Data.updateOne(
       { "Data._id": id },
       { $set: { "Data.$.isDelete": true } }
     );
+
+    if (result.nModified === 0) {
+      return res.status(404).send({ message: "Document not found" });
+    }
+
     console.log(result);
     res.status(200).send({ message: "Document deleted successfully" });
     DataformatingforSheet();
@@ -77,6 +87,7 @@ app.put("/update/:id", async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 const EmployeeSchema = new mongoose.Schema({
   PlanId: { type: String, required: true },
   EmployeeId: { type: [String], required: true },
@@ -95,7 +106,7 @@ const Empid = [
 
 app.post('/api/employee', async (req, res) => {
   try {
-    const PlanId = 'RCka'; 
+    const PlanId = 'RCka';
     const EmployeeId = Empid.map(emp => emp.title);
     const EmployeeName = Empid.map(emp => emp.name);
 
@@ -113,6 +124,7 @@ app.post('/api/employee', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 app.get('/api/employee', async (req, res) => {
   try {
     const employees = await Employee.find({}, 'EmployeeId EmployeeName -_id');
@@ -127,6 +139,7 @@ app.get('/api/employee', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);

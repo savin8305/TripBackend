@@ -9,6 +9,7 @@ import {
   Paper,
   IconButton,
   Button,
+  TextField
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,9 +17,8 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TripModal from "./TripForTable.js";
-
 const BasicTable = (props) => {
-  const [details, setDetails] = React.useState([]);
+  const [details,setDetails] = React.useState([]);
   const [searchPlanId, setSearchPlanId] = React.useState("");
   const [editClickState, setEditClickState] = React.useState(false);
   const [editDate, setEditDate] = React.useState("");
@@ -31,6 +31,7 @@ const BasicTable = (props) => {
   const [editRemarks, setEditRemarks] = React.useState("");
   const [editisDelete, setEditIsDelete] = React.useState(false);
   const [idforEdit, setId] = React.useState("");
+  const [planid, setPlanid] = React.useState("");
 
   React.useEffect(() => {
     fetchData();
@@ -38,21 +39,32 @@ const BasicTable = (props) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `https://trip-backend-rust.vercel.app/getdata?PlanId=${searchPlanId}`
-      );
+      const response = await axios.get(`https://trip-backend-rust.vercel.app/getdata?PlanId=${searchPlanId}`);
       setDetails(response.data);
+      if (response.data.length > 0) {
+        const lastPlanId = response.data[response.data.length - 1].PlanId;
+        const incrementedPlanId = incrementPlanId(lastPlanId);
+        setPlanid(incrementedPlanId);
+        console.log("PlanId:", incrementedPlanId);
+      }
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
   };
 
-  const deleteData = async (id) => {
+  const incrementPlanId = (planId) => {
+    const numericPart = parseInt(planId.substring(3));
+    const nextNumericPart = numericPart + 1;
+    return `Pl-${nextNumericPart.toString().padStart(4, '0')}`;
+  };
+
+
+  const deleteData = async (id,plan) => {
     try {
       await axios.delete(`https://trip-backend-rust.vercel.app/deletedata/${id}`);
       setDetails(details.filter((item) => item._id !== id));
-      toast.success("Data deleted successfully!");
-    } catch (error) {
+      toast.success(`🎉✨ Your plan ID ${plan} has been successfully deleted! ✨🎉`); 
+       } catch (error) {
       console.error("Error deleting item:", error);
       toast.error("Error deleting item. Please try again.");
     }
@@ -87,7 +99,7 @@ const BasicTable = (props) => {
         department,
         sno,
       });
-      toast.success("Data submitted successfully!");
+      toast.success(`✨ Your plan ID ${planid} has been generated successfully! 🎉`);      
       fetchData();
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -186,6 +198,13 @@ const BasicTable = (props) => {
         flexDirection: "column",
       }}
     >
+       <TextField
+        label="Search by PlanId"
+        variant="outlined"
+        value={searchPlanId}
+        onChange={handleSearch}
+        style={{ marginBottom: "1rem" }}
+      />
       <div
         className="maintTripHomeTable"
         style={{
@@ -273,7 +292,7 @@ const BasicTable = (props) => {
                       <IconButton
                         color="secondary"
                         aria-label="delete"
-                        onClick={() => deleteData(row._id)}
+                        onClick={() => deleteData(row._id,row.PlanId)}
                       >
                         <DeleteIcon
                           style={{ color: props.check ? "white" : "black" }}
@@ -305,7 +324,7 @@ const BasicTable = (props) => {
           Clear
         </Button>
       </div>
-      <ToastContainer position="bottom-right" />
+      <ToastContainer style={{marginTop:"5rem"}}/>
     </div>
   );
 };
