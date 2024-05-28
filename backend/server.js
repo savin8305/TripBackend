@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors({
   origin: 'https://tripexpense.vercel.app',
   credentials: true,
-  optionsSuccessStatus: 204, // 204 No Content is a common choice
+  optionsSuccessStatus: 204, 
 }));connectToDatabase()
 setupRoutes(app);
 console.log("process.env.MONGO_URI",process.env.MONGO_URI);

@@ -16,15 +16,14 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import InputAdornment from '@mui/material/InputAdornment';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
-import countryCodeLookup from "country-code-lookup";
 
 const ButtonDialog = (props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [globalcountrydata, setGlobalCountryData] = useState([]);
-  const [globalstatedata, setGlobalStateData] = useState([]);
-  const [stateid, setStateId] = useState("");
-  const [clientname, setClientName] = useState("");
+  const [globalCountryData, setGlobalCountryData] = useState([]);
+  const [globalStateData, setGlobalStateData] = useState([]);
+  const [globalCityData, setGlobalCityData] = useState([]);
+  const [clientName, setClientName] = useState("");
   const [purpose, setPurpose] = useState("");
   const [remarks, setRemarks] = useState("");
   const [countries, setCountries] = useState([]);
@@ -35,11 +34,11 @@ const ButtonDialog = (props) => {
   const [selectedCity, setSelectedCity] = useState("");
   const [iso2Code, setIso2Code] = useState("");
 
+  const apiKey = "NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==";
+
   const fetchCountries = async () => {
     try {
-      const apiKey = "NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==";
       const apiUrl = "https://api.countrystatecity.in/v1/countries";
-
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -49,19 +48,15 @@ const ButtonDialog = (props) => {
       });
       const data = await response.json();
       setGlobalCountryData(data);
-      const countryNames = data.map((option) => option.name);
-      setCountries(countryNames);
+      setCountries(data.map((option) => option.name));
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching countries:", error);
     }
   };
 
-  const fetchState = async (value) => {
+  const fetchStates = async (iso2) => {
     try {
-      const country = globalcountrydata.find((item) => item.name === value);
-      const apiKey = "NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==";
-      const apiUrl = `https://api.countrystatecity.in/v1/countries/${country.iso2}/states`;
-
+      const apiUrl = `https://api.countrystatecity.in/v1/countries/${iso2}/states`;
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -71,19 +66,15 @@ const ButtonDialog = (props) => {
       });
       const data = await response.json();
       setGlobalStateData(data);
-      setStates(data);
-      setStateId(country.id);
+      setStates(data.map((state) => state.name));
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching states:", error);
     }
   };
 
-  const fetchCity = async (value) => {
+  const fetchCities = async (countryIso2, stateIso2) => {
     try {
-      const state = globalstatedata.find((item) => item.name === value);
-      const apiKey = "NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==";
-      const apiUrl = `https://api.countrystatecity.in/v1/countries/${iso2Code}/states/${state.iso2}/cities`;
-
+      const apiUrl = `https://api.countrystatecity.in/v1/countries/${countryIso2}/states/${stateIso2}/cities`;
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -92,22 +83,21 @@ const ButtonDialog = (props) => {
         },
       });
       const data = await response.json();
-      setCities(data);
+      setGlobalCityData(data);
+      setCities(data.map((city) => city.name));
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching cities:", error);
     }
   };
 
-  const handleCountryChange = (e, value) => {
+  const handleCountryChange = async (e, value) => {
     setSelectedCountry(value);
     if (value) {
-      fetchState(value);
-      const countryInfo = countryCodeLookup.byCountry(value);
-      if (countryInfo) {
-        setIso2Code(countryInfo.iso2);
-      } else {
-        setIso2Code("");
-      }
+      const country = globalCountryData.find((item) => item.name === value);
+      setIso2Code(country.iso2);
+      await fetchStates(country.iso2);
+      setSelectedState("");
+      setSelectedCity("");
     } else {
       setStates([]);
       setCities([]);
@@ -117,10 +107,12 @@ const ButtonDialog = (props) => {
     }
   };
 
-  const handleStateChange = (e, value) => {
+  const handleStateChange = async (e, value) => {
     setSelectedState(value);
     if (value) {
-      fetchCity(value);
+      const state = globalStateData.find((item) => item.name === value);
+      await fetchCities(iso2Code, state.iso2);
+      setSelectedCity("");
     } else {
       setCities([]);
       setSelectedCity("");
@@ -135,7 +127,25 @@ const ButtonDialog = (props) => {
     fetchCountries();
   }, []);
 
-  const handleOpen = () => {
+  useEffect(() => {
+    if (selectedCountry) {
+      const country = globalCountryData.find((item) => item.name === selectedCountry);
+      if (country) {
+        fetchStates(country.iso2);
+      }
+    }
+  }, [selectedCountry]);
+
+  useEffect(() => {
+    if (selectedState) {
+      const state = globalStateData.find((item) => item.name === selectedState);
+      if (state) {
+        fetchCities(iso2Code, state.iso2);
+      }
+    }
+  }, [selectedState]);
+
+  const handleOpen = async () => {
     if (props.type === "updatedata") {
       setSelectedCountry(props.row[1]);
       setSelectedState(props.row[2]);
@@ -143,12 +153,34 @@ const ButtonDialog = (props) => {
       setClientName(props.row[4]);
       setPurpose(props.row[5]);
       setRemarks(props.row[6]);
+
+      if (props.row[1]) {
+        const country = globalCountryData.find((item) => item.name === props.row[1]);
+        if (country) {
+          setIso2Code(country.iso2);
+          await fetchStates(country.iso2);
+        }
+      }
+      if (props.row[2]) {
+        const country = globalCountryData.find((item) => item.name === props.row[1]);
+        const state = globalStateData.find((item) => item.name === props.row[2]);
+        if (state) {
+          await fetchCities(country.iso2, state.iso2);
+        }
+      }
     }
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    // Reset the form fields on close
+    setSelectedCountry("");
+    setSelectedState("");
+    setSelectedCity("");
+    setClientName("");
+    setPurpose("");
+    setRemarks("");
   };
 
   const handleClearInput = () => {
@@ -169,29 +201,15 @@ const ButtonDialog = (props) => {
       selectedCountry,
       selectedState,
       selectedCity,
-      clientname,
+      clientName,
       purpose,
       remarks,
       props.day,
     ];
     props.settableData([...props.tableData, datadialog]);
-    setSelectedCountry("");
-    setSelectedState("");
-    setSelectedCity("");
-    setClientName("");
-    setPurpose("");
-    setRemarks("");
     handleClose();
   };
-  const handleCancel=()=>{
-    setSelectedCountry("");
-    setSelectedState("");
-    setSelectedCity("");
-    setClientName("");
-    setPurpose("");
-    setRemarks("");
-    handleClose();
-  }
+
   const handleUpdateDialog = () => {
     const index = props.tableData.findIndex((datarow) => datarow === props.row);
     var row = [
@@ -199,7 +217,7 @@ const ButtonDialog = (props) => {
       (props.tableData[index][1] = selectedCountry),
       (props.tableData[index][2] = selectedState),
       (props.tableData[index][3] = selectedCity),
-      (props.tableData[index][4] = clientname),
+      (props.tableData[index][4] = clientName),
       (props.tableData[index][5] = purpose),
       (props.tableData[index][6] = remarks),
     ];
@@ -229,7 +247,7 @@ const ButtonDialog = (props) => {
             top: 8,
             right: 8,
             color: getColor(),
-          }} edge="start" onClick={handleCancel} aria-label="close">
+          }} edge="start" onClick={handleClose} aria-label="close">
             <CloseIcon />
           </IconButton>
           {`Day-${props.day} ${props.date}`}
@@ -287,7 +305,8 @@ const ButtonDialog = (props) => {
                   disablePortal
                   size="small"
                   id="combo-box-state"
-                  options={states.map((state) => state.name)}
+                  options={states}
+                  getOptionLabel={(option) => option}
                   value={selectedState}
                   onChange={handleStateChange}
                   renderInput={(params) => (
@@ -317,7 +336,8 @@ const ButtonDialog = (props) => {
                   disablePortal
                   size="small"
                   id="combo-box-city"
-                  options={cities.map((city) => city.name)}
+                  options={cities}
+                  getOptionLabel={(option) => option}
                   value={selectedCity}
                   onChange={handleCityChange}
                   renderInput={(params) => (
@@ -349,7 +369,7 @@ const ButtonDialog = (props) => {
                     fullWidth
                     label="Client"
                     onChange={(e) => setClientName(e.target.value)}
-                    value={clientname}
+                    value={clientName}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -434,35 +454,31 @@ const ButtonDialog = (props) => {
           </form>
         </DialogContent>
         <DialogActions>
-          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'space-between',margin:"15px" }}>
+          <Button
+            style={{ backgroundColor: getColor(), color: theme.palette.background.paper }}
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          {props.type === "newdata" ? (
             <Button
               style={{ backgroundColor: getColor(), color: theme.palette.background.paper }}
-              onClick={handleCancel}
+              onClick={handleSubmitDialog}
+              type="submit"
+              variant="contained"
             >
-              Cancel
+              Submit
             </Button>
-            <Box>
-              {props.type === "newdata" ? (
-                <Button
-                  style={{ backgroundColor: getColor(), color: theme.palette.background.paper }}
-                  onClick={handleSubmitDialog}
-                  type="submit"
-                  variant="contained"
-                >
-                  Submit
-                </Button>
-              ) : (
-                <Button
-                  style={{ backgroundColor: getColor(), color: theme.palette.background.paper }}
-                  onClick={handleUpdateDialog}
-                  type="submit"
-                  variant="contained"
-                >
-                  Update
-                </Button>
-              )}
-            </Box>
-          </Box>
+          ) : (
+            <Button
+              style={{ backgroundColor: getColor(), color: theme.palette.background.paper }}
+              onClick={handleUpdateDialog}
+              type="submit"
+              variant="contained"
+            >
+              Update
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </div>
