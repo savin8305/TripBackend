@@ -111,7 +111,7 @@ const ButtonDialog = (props) => {
     setSelectedState(value);
     if (value) {
       const state = globalStateData.find((item) => item.name === value);
-      await fetchCities(iso2Code, state.iso2);
+      await fetchCities(iso2Code,state.iso2);
       setSelectedCity("");
     } else {
       setCities([]);
@@ -134,16 +134,19 @@ const ButtonDialog = (props) => {
         fetchStates(country.iso2);
       }
     }
-  }, [selectedCountry]);
+  },[selectedCountry]);
 
   useEffect(() => {
     if (selectedState) {
+      console.log("i am homedit selectedstate",selectedState);
       const state = globalStateData.find((item) => item.name === selectedState);
+      console.log("i am homeedit state",state);
       if (state) {
-        fetchCities(iso2Code, state.iso2);
+        const country = globalCountryData.find((item) => item.name === selectedCountry);
+        fetchCities(country.iso2, state.iso2);
       }
     }
-  }, [selectedState]);
+  }, [handleCityChange]);
 
   const handleOpen = async () => {
     if (props.type === "updatedata") {
@@ -173,7 +176,6 @@ const ButtonDialog = (props) => {
 
   const handleClose = () => {
     setOpen(false);
-    // Reset the form fields on close
     setSelectedCountry("");
     setSelectedState("");
     setSelectedCity("");
@@ -241,12 +243,17 @@ const ButtonDialog = (props) => {
       )}
       <Dialog open={open}>
         <DialogTitle style={{ display: "flex", alignItems: "center" }}>
-          <IconButton style={{
-            position: 'absolute',
-            top: 8,
-            right: 8,
-            color: getColor(),
-          }} edge="start" onClick={handleClose} aria-label="close">
+          <IconButton
+            style={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              color: getColor(),
+            }}
+            edge="start"
+            onClick={handleClose}
+            aria-label="close"
+          >
             <CloseIcon />
           </IconButton>
           {`Day-${props.day} ${props.date}`}
@@ -483,5 +490,4 @@ const ButtonDialog = (props) => {
     </div>
   );
 };
-
 export default ButtonDialog;

@@ -15,12 +15,19 @@ export async function connectToDatabase() {
   }
 }
 
+export const generatePlanId = async () => {
+  const count = await Data.countDocuments();
+  const paddedCount = String(count + 1).padStart(4, "0");
+  return `Pl-${paddedCount}`;
+};
+
 const dataSchema = mongoose.Schema({
   PlanId: {
     type: String,
     required: true,
-    default: () => nanoid(4),
-    index: { unique: true },
+    default: generatePlanId,
+    unique: true,
+    index: true,
   },
   EmployeeId: [String],
   EmployeeName: [String],
@@ -32,11 +39,12 @@ const dataSchema = mongoose.Schema({
       type: String,
       required: true,
       default: () => nanoid(7),
-      index: { unique: true },
+      unique: true,
+      index: true,
     },
     isDelete: {
       type: Boolean,
-      default: false
+      default:false,
     },
     Date: String,
     Day: Number,
@@ -49,6 +57,4 @@ const dataSchema = mongoose.Schema({
   }],
 });
 
-
 export const Data = mongoose.model("Data", dataSchema);
-

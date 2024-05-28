@@ -32,7 +32,7 @@ const TripPage = (props) => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await axios.get('https://trip-backend-rust.vercel.app/api/employee');
+        const response = await axios.get('http://localhost:4000/api/employee');
         const employeeData = response.data;
         const formattedEmployeeData = employeeData.map(emp => ({
           title: emp.EmployeeId,
@@ -177,7 +177,7 @@ const TripPage = (props) => {
               }}
               fullWidth
               options={employeeOptions}
-              getOptionLabel={(option) =>`${option.title}-${option.name}`}
+              getOptionLabel={(option) => `${option.title}-${option.name}`}
               renderOption={(props, option, { selected }) => (
                 <li {...props}>
                   <Checkbox style={{ marginRight: 2 }} checked={selected} />
@@ -402,7 +402,7 @@ const TripPage = (props) => {
               <EditNoteOutlinedIcon
                 onClick={handleOpen}
                 className={dept === "services" ? "" : "calendareditChild"}
-                style={{ fontSize: '30px', width: '34px', height: '30px', color: props.check ? "white" : "black", background:props.check ? "black" : "white"}}
+                style={{ fontSize: '30px', width: '34px', height: '30px', color: props.check ? "white" : "black", background: props.check ? "black" : "white" }}
               />
             </div>
           </div>

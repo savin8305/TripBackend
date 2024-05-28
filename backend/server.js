@@ -5,7 +5,6 @@ import { setupRoutes } from "./routes.js";
 import { Data, connectToDatabase } from "./db.js";
 import DataformatingforSheet from "./controllers/tripController.js";
 import mongoose from "mongoose";
-import { nanoid } from "nanoid";
 config();
 
 const app = express();

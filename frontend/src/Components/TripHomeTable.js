@@ -51,7 +51,6 @@ const BasicTable = (props) => {
       console.error("Failed to fetch data:", error);
     }
   };
-
   const incrementPlanId = (planId) => {
     const numericPart = parseInt(planId.substring(3));
     const nextNumericPart = numericPart + 1;
@@ -88,9 +87,6 @@ const BasicTable = (props) => {
         dept: department,
         srno: sno,
       } = props;
-      console.log("employeeID in submitTableData:", props.employeeID);
-      console.log("employeeName in submitTableData:", props.employeeName);
-
       await axios.post("https://trip-backend-rust.vercel.app/tripData", {
         tripTableData,
         employee,
