@@ -62,9 +62,7 @@ const ButtonDialog = (props) => {
       });
       const data = await response.json();
       setGlobalStateData(data);
-      console.log("i am setGlobalstat", globalStateData);
       setStates(data.map((state) => state.name));
-      console.log("i am setstates data", states);
     } catch (error) {
       console.error("Error fetching states:", error);
     }
@@ -80,7 +78,6 @@ const ButtonDialog = (props) => {
         },
       });
       const data = await response.json();
-      console.log("i am data", data);
       setGlobalCityData(data);
       setCities(data.map((city) => city.name));
     } catch (error) {
@@ -136,9 +133,7 @@ const ButtonDialog = (props) => {
 
   useEffect(() => {
     if (selectedState) {
-      console.log("sleected state", selectedState, globalStateData.find((item) => item.name === selectedState));
       const state = globalStateData.find((item) => item.name === selectedState);
-      console.log("i am state", state);
       if (state) {
         const country = globalCountryData.find((item) => item.name === selectedCountry);
         fetchCities(country.iso2, state.iso2);

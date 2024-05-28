@@ -138,9 +138,7 @@ const ButtonDialog = (props) => {
 
   useEffect(() => {
     if (selectedState) {
-      console.log("i am homedit selectedstate",selectedState);
       const state = globalStateData.find((item) => item.name === selectedState);
-      console.log("i am homeedit state",state);
       if (state) {
         const country = globalCountryData.find((item) => item.name === selectedCountry);
         fetchCities(country.iso2, state.iso2);

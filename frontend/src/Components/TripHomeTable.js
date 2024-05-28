@@ -72,10 +72,7 @@ const BasicTable = (props) => {
   const handleSearch = (e) => {
     setSearchPlanId(e.target.value);
   };
-  React.useEffect(() => {
-    console.log("Received employeeID in BasicTable:", props.employeeID);
-    console.log("Received employeeName in BasicTable:", props.employeeName);
-  }, [props.employeeID, props.employeeName]);
+
 
   const submitTableData = async () => {
     try {
