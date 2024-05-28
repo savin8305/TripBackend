@@ -153,7 +153,6 @@ const ButtonDialog = (props) => {
       setClientName(props.row[4]);
       setPurpose(props.row[5]);
       setRemarks(props.row[6]);
-
       if (props.row[1]) {
         const country = globalCountryData.find((item) => item.name === props.row[1]);
         if (country) {
