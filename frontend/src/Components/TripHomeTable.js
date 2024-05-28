@@ -234,7 +234,7 @@ const BasicTable = (props) => {
               {details.map((row, index) =>
                 !row.isDelete ? (
                   <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                    {[index + 1, row.Date, row.Day, row.Country, row.State, row.City, row.ClientName, row.Purpose, row.Remarks, row.isDelete.toString()].map(
+                    {[row.SRNumber, row.Date, row.Day, row.Country, row.State, row.City, row.ClientName, row.Purpose, row.Remarks, row.isDelete.toString()].map(
                       (data, dataIndex) => (
                         <TableCell
                           key={dataIndex}

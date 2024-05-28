@@ -8,14 +8,14 @@ export async function handleTripDataPost(req, res) {
   if (!PlanId) {
     planIdToUse = await generatePlanId(); // Ensure generatePlanId is accessible
   }
-
+ const mydata=await Data.find({});
   const data = new Data({
     PlanId: planIdToUse,
     EmployeeId: employee,
     EmployeeName: employeename,
     Type: type,
     Department: department,
-    SRNumber: sno || 2,
+    SRNumber: sno || mydata.length,
     Data: tripTableData,
   });
 
