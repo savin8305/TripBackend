@@ -144,7 +144,7 @@ const ButtonDialog = (props) => {
         fetchCities(country.iso2, state.iso2);
       }
     }
-  }, [selectedState]);
+  }, [handleCityChange]);
 
   const handleOpen = async () => {
     if (props.type === "updatedata") {
