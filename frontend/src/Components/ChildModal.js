@@ -5,7 +5,7 @@ import {
   AccordionDetails,
   Typography,
 } from "@mui/material";
-import AccordionTable from "./TableContainer.js";
+import AccordionTable from "./TableContainer.js"; // Assuming this is the table component
 import HomeEditTable from "./HomeEditTable.js";
 
 const MultipleAccordions = (props) => {
@@ -24,11 +24,16 @@ const MultipleAccordions = (props) => {
           className={
             (expandedPanel && expandedPanel === key) ? "basic expandedAccordion" : "basic expandedContent"
           }
+          style={{
+            borderRadius: '52px',
+            background: props.check ? '#1c1c1c' : '#f2f2f2',
+          }}
+
         >
           <AccordionSummary >
             <Typography
               variant="h7"
-              style={{ text: "center", fontWeight: 500, fontSize: "1.5rem" }}
+              style={{ textAlign: "center", fontWeight: 500, fontSize: "1.5rem" }}
             >
               {`Day ${key + 1}`}  {item.format("DD-MM-YYYY")}
             </Typography>
@@ -44,8 +49,14 @@ const MultipleAccordions = (props) => {
           </AccordionSummary>
           <AccordionDetails
             className="expandedContent mainAccordin2"
+            style={{ maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' }} // Ensuring the accordion details are scrollable
           >
-            <AccordionTable tableData={props.tableData} date={item.format("DD-MM-YYYY")} settableData={props.settableData} check={props.check} />
+            <AccordionTable 
+              tableData={props.tableData} 
+              date={item.format("DD-MM-YYYY")} 
+              settableData={props.settableData} 
+              check={props.check} 
+            />
           </AccordionDetails>
         </Accordion>
       ))}

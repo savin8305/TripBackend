@@ -67,6 +67,10 @@ export default function NestedModal(props) {
                         justifyContent: "center",
                         alignItems: "center",
                     }}
+                    style={{
+                        borderRadius: '52px',
+                        background:props.check ?'linear-gradient(145deg, #151515, #191919)':'linear-gradient(145deg, #e6e6e6, #ffffff)',
+                      }}
                     className="modalparent"
                 >
                     <h2 id="parent-modal-title" style={{ fontSize: "3rem", color: props.check ? "white" : "black" }}>

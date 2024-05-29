@@ -48,6 +48,12 @@ export default function NestedModal(props) {
             ...style,
           }}
           className="boxContainer"
+          style={{
+            borderRadius: '52px',
+            background:props.check ?'linear-gradient(145deg, #151515, #191919)':'linear-gradient(145deg, #e6e6e6, #ffffff)',
+          }}
+               
+          
         >
           <IconButton
             onClick={handleClose}

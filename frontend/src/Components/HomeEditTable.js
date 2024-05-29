@@ -111,7 +111,7 @@ const ButtonDialog = (props) => {
     setSelectedState(value);
     if (value) {
       const state = globalStateData.find((item) => item.name === value);
-      await fetchCities(iso2Code,state.iso2);
+      await fetchCities(iso2Code, state.iso2);
       setSelectedCity("");
     } else {
       setCities([]);
@@ -134,7 +134,7 @@ const ButtonDialog = (props) => {
         fetchStates(country.iso2);
       }
     }
-  },[selectedCountry]);
+  }, [selectedCountry]);
 
   useEffect(() => {
     if (selectedState) {
@@ -144,7 +144,7 @@ const ButtonDialog = (props) => {
         fetchCities(country.iso2, state.iso2);
       }
     }
-  }, [handleCityChange]);
+  }, [selectedState]);
 
   const handleOpen = async () => {
     if (props.type === "updatedata") {
@@ -236,7 +236,7 @@ const ButtonDialog = (props) => {
         <AddCircleOutlineOutlinedIcon onClick={handleOpen} />
       ) : (
         <IconButton onClick={handleOpen} color="primary">
-          <EditIcon style={{ color: getColor() }} />
+          <EditIcon />
         </IconButton>
       )}
       <Dialog open={open}>
@@ -457,7 +457,7 @@ const ButtonDialog = (props) => {
             </Grid>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ display: "flex", justifyContent: "space-between",margin:"15px" }}>
           <Button
             style={{ backgroundColor: getColor(), color: theme.palette.background.paper }}
             onClick={handleClose}
@@ -488,4 +488,5 @@ const ButtonDialog = (props) => {
     </div>
   );
 };
+
 export default ButtonDialog;

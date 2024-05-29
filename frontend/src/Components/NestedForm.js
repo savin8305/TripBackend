@@ -227,7 +227,7 @@ const ButtonDialog = (props) => {
         Purpose: purpose,
         Remarks: remarks,
       };
-      const response = await fetch(`https://trip-backend-rust.vercel.app/update/${id}`, {
+      const response = await fetch(`http://localhost:4000/update/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -492,7 +492,7 @@ const ButtonDialog = (props) => {
             </Grid>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ display: "flex", justifyContent: "space-between",margin:"15px" }}>
           <Button
             style={{ backgroundColor: getColor(), color: theme.palette.background.paper }}
             onClick={handleClose}
