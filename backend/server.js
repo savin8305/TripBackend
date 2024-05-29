@@ -10,7 +10,7 @@ config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'https://tripexpense.vercel.app',
+  origin: 'http://localhost:3000',
   credentials: true,
   optionsSuccessStatus: 204, // 204 No Content is a common choice
 }));
