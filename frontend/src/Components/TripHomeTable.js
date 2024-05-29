@@ -41,7 +41,7 @@ const BasicTable = (props) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/getdata`);
+      const response = await axios.get(`https://trip-backend-rust.vercel.app/getdata`);
       setDetails(response.data);
       setFilteredDetails(response.data);
       if (response.data.length > 0) {
@@ -63,7 +63,7 @@ const BasicTable = (props) => {
 
   const deleteData = async (id, plan) => {
     try {
-      await axios.delete(`http://localhost:4000/deletedata/${id}`);
+      await axios.delete(`https://trip-backend-rust.vercel.app/deletedata/${id}`);
       setDetails(details.filter((item) => item._id !== id));
       setFilteredDetails(filteredDetails.filter((item) => item._id !== id));
       toast.success(`🎉✨ Your plan ID ${plan} has been successfully deleted! ✨🎉`);
@@ -95,7 +95,7 @@ const BasicTable = (props) => {
         dept: department,
         srno: sno,
       } = props;
-      await axios.post("http://localhost:4000/tripData", {
+      await axios.post("https://trip-backend-rust.vercel.app/tripData", {
         tripTableData,
         employee,
         employeename,
@@ -179,7 +179,7 @@ const BasicTable = (props) => {
 
   const updateTableData = async (updatedData) => {
     try {
-      await axios.put(`http://localhost:4000/updatedata/${idforEdit}`, updatedData);
+      await axios.put(`https://trip-backend-rust.vercel.app/updatedata/${idforEdit}`, updatedData);
       toast.success("Data updated successfully!");
       setEditClickState(false);
       fetchData();
